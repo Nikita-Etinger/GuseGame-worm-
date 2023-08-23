@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Guse of war", "Guse of war.vcxproj", "{560F4A03-5253-4D6E-952C-418EB53E963E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Debug|x64.ActiveCfg = Debug|x64
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Debug|x64.Build.0 = Debug|x64
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Debug|x86.ActiveCfg = Debug|Win32
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Debug|x86.Build.0 = Debug|Win32
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Release|x64.ActiveCfg = Release|x64
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Release|x64.Build.0 = Release|x64
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Release|x86.ActiveCfg = Release|Win32
+		{560F4A03-5253-4D6E-952C-418EB53E963E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {309B49FC-7AEA-4423-B228-879968A9C45D}
+	EndGlobalSection
+EndGlobal
