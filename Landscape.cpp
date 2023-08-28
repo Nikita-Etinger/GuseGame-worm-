@@ -1,35 +1,45 @@
 #include "Landscape.h"
-#include <random>
+#include "Config.h"
+
 
 void Landscape::generateLandscape() {
     const int groundHeight = WINDOW_H - BLOCK_SIZE * 50; // Высота земли (50 блоков)
 
-    // Генерация земли и блоков ниже земли
+    sf::VertexArray vertices(sf::Quads);
+
     for (int y = WINDOW_H; y >= 0; y -= BLOCK_SIZE) {
         for (int x = 0; x < WINDOW_W / BLOCK_SIZE; ++x) {
-            if (y > groundHeight) {
-                groundPositions.push_back(sf::Vector2f(static_cast<float>(x * BLOCK_SIZE), static_cast<float>(y)));
-            }
-            else {
-                groundPositions.push_back(sf::Vector2f(static_cast<float>(x * BLOCK_SIZE), static_cast<float>(groundHeight)));
-            }
+            sf::Vertex v1(sf::Vector2f(float(x * BLOCK_SIZE), float(std::min(y, groundHeight))), sf::Color::Green);
+            sf::Vertex v2(sf::Vector2f(float((x + 1) * BLOCK_SIZE), float(std::min(y, groundHeight))), sf::Color::Green);
+            sf::Vertex v3(sf::Vector2f(float((x + 1) * BLOCK_SIZE), float(y)), sf::Color::Green);
+            sf::Vertex v4(sf::Vector2f(float(x * BLOCK_SIZE), float(y)), sf::Color::Green);
+
+            vertices.append(v1);
+            vertices.append(v2);
+            vertices.append(v3);
+            vertices.append(v4);
         }
     }
 
-    groundBlock.setSize(sf::Vector2f(BLOCK_SIZE, BLOCK_SIZE));
-    groundBlock.setFillColor(sf::Color::Green);
+    groundVertices = vertices;
 }
 
-void Landscape::draw(sf::RenderWindow& window) {
+std::vector<sf::FloatRect>& Landscape::getBlocks(){
+    blockRectsBuf.clear();
 
-    for (auto& position : groundPositions) {
-        groundBlock.setPosition(position);
-        window.draw(groundBlock);
+    for (size_t i = 0; i < groundVertices.getVertexCount(); i += 4) {
+        // Получаем координаты вершин текущего блока
+        float blockLeft = groundVertices[i].position.x;
+        float blockTop = groundVertices[i].position.y;
+        float blockRight = groundVertices[i + 1].position.x;
+        float blockBottom = groundVertices[i + 2].position.y;
+
+        // Создаем прямоугольник для текущего блока и добавляем его в массив
+        blockRectsBuf.push_back(sf::FloatRect(blockLeft, blockTop, blockRight - blockLeft, blockBottom - blockTop));
     }
-    
-}
 
-std::vector<sf::Vector2f> Landscape::getCoordinate()
-{
-    return groundPositions;
+    return blockRectsBuf;
+}
+void Landscape::draw(sf::RenderWindow& window) {
+    window.draw(groundVertices);
 }

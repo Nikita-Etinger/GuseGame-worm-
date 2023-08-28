@@ -1,25 +1,28 @@
-// Game.h
 #pragma once
 
-#include <iostream> 
 #include <SFML/Graphics.hpp>
-#include "Config.h"
-#include "Landscape.h"
-#include "Player.h"
 #include <vector>
+#include "Player.h"
+#include "Landscape.h"
 
 class Game {
 public:
-
     Game();
     void run();
 
+
 private:
+    sf::Font font;
     Landscape landSpace;
     std::vector<Player> players;
-    sf::Font font;
+    int activePlayerIndex; // Индекс активного игрока
+    float time;
+    int frames = 0;
+    sf::Clock clock;
+    sf::Clock fpsClock;
+    
     void processInput(sf::RenderWindow& window);
-    void update();
+    void update(float time);
     void render(sf::RenderWindow& window);
-
+    void nextTurn(); // Переход к следующему игроку
 };
